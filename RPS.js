@@ -101,6 +101,10 @@ it was a mess, but I realized I wasn't dividing and conquering. My goal was
 simply 'kill the beast' rather than starting with something like 'take out its
 legs first!' so I went back to the drawing board, and our opponent can now 
 spit our pseudo-random rock paper scissors choices, lets go!*/
+
+
+
+// computer that spits out pseudo random RPS decisions
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -112,3 +116,62 @@ function computerPlay() {
 
 };
 console.log(computerPlay())
+
+
+// variable to hold our player's choice
+player = window.prompt("type rock, paper, or scissors please");
+
+
+//function to play the game, called RPS
+function RPS(computerSelection, playerSelection){
+    //variables for rock paper and scissors so they will be case insesitive
+    let rock = /rock/i;
+    let scissors = /scissors/i;
+    let paper = /paper/i;
+    console.log(computerSelection);
+    console.log(playerSelection);
+    console.log(1)
+    if (computerSelection == 'rock') {
+        console.log("1")
+        switch(playerSelection) {
+            case rock:
+                return  "You tie! Rock ties with Rock";
+            case paper:
+                return  "You Win! Paper beats Rock";
+            case scissors:
+                return  "You Lose! Rock beats Scissors";
+        };
+    };
+
+    if (computerSelection == 'paper') {
+        console.log("2")
+        switch(playerSelection) {
+            case rock:
+                return "You Lose! Paper beats Rock";
+            case paper:
+                return "You tie! Paper ties with Paper";
+            case scissors:
+                return "You Win! Scissors beats Paper";
+        };
+    };
+
+    if (computerSelection == 'scissors'){
+        console.log("3")
+        switch(playerSelection) {
+            case rock:
+                return  "You Win! Rock beats Scissors";
+            case paper:
+                return  "You Lose! Scissors beats Paper";
+            case scissors:
+                return  "You tie! Scissors ties with Scissors";
+        };
+    };
+    console.log("hello")
+};
+    console.log(RPS(computerPlay, player));
+
+    /*As we can see from this commit, I made progress, I realized you can input
+    a function into another, lol. I still have one glaring issue thoug, my
+    switch statements aren't working! I used a bunch of console.logs and 
+    realized none of the initial if statements to enter the switchs were 
+    working, so that is the next problem to tackle!*/
