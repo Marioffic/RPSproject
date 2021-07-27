@@ -1,113 +1,20 @@
-/* First we understand the problem, then we plan in 
-pseudo code, the we divide and conquer, lets start 
-with understand.
+/* Ok, we have done it! I tried to crack the problem from yesterday for a while
+until I finally broke down and headed to the TOP discord, where GuezlaneKarim
+helped me to realize that I wasn't calling the game function right, I had 
+forgotton to put parenthesis on one of the arguements that happend to also be 
+a function, so the output was never touching our main one, which is why none
+of the if statements were triggering. So, our if statements triggered once we
+fixed that (I confirmed with console,logs) but my switch statements weren't
+triggering. I realized it was because my regex variables weren't working, so
+instead I just set our player choice to lowercase with a method to achieve case
+insensitivity. Overall I am pretty proud of myself and really enjoyed this 
+project!*/
 
-Understand- Not too much here, we need to build a 
-program that plays rock paper scissors, meaning 
-when a user inputs R, P, or S the computer should
-throw out a rock paper or scissors, with an answer
-independent of the user's, so probably a random one
-
--plan in pseudo code-
-if input == Rock, Paper, or Scissors {
-    display random choide of (Rock Paper or Scissors)
-}
-else {
-    display: Gimme rock, paper, or scissors and 
-    nothing else!
-}
-Ok, now on to actual code!
-*/
-/*
-
-
-player = window.prompt("type rock, paper, or scissors please");
-computerPlay = function(){
-    let Rps = [/rock/g, /paper/g, /scissors/g];
-    Rps = Rps.sort((/rock/g, /paper/g, /scissors/g) => 0.5 - Math.random());
-    console.log(Rps[0])
-    return Rps[0]
-};
-
-
-*
-
-
-function playRound(playerSelection, computerSelection) {
-    /*-------- FAULTY CODE------
-    Switch(playerSelection, computerSelection) {
-        case playerSelection==/rock/g && computerSelection==/paper/g:
-            console.log("you win!")
-            break;
-        case 
-    ---------FAULTY CODE-------
-    } I hit a road  block yesterday, after thinking about it I found the solution!
-I will commit my initial road block though so I can look back and see how I 
-was doing. As a result I have commented out the faulty code and am starting
-again*/
-
-/*
-
---------------------------------------------------------------------
-
-    if (computerSelection === /rock/g) {
-        switch(playerSelection) {
-            case /rock/g:
-                return  "You tie! Rock ties with Rock";
-            case /paper/g:
-                return  "You Win! Paper beats Rock";
-            case /scissors/g:
-                return  "You Lose! Rock beats Scissors";
-        };
-    };
-    if (computerSelection === /paper/g) {
-        switch(playerSelection) {
-            case /rock/g:
-                return "You Lose! Paper beats Rock";
-            case /paper/g:
-                return "You tie! Paper ties with Paper";
-            case /scissors/g:
-                return "You Win! Scissors beats Paper";
-        };
-    };
-    if (computerSelection === /scissors/g){
-        switch(playerSelection) {
-            case /rock/g:
-                return  "You Win! Rock beats Scissors";
-            case /paper/g:
-                return  "You Lose! Scissors beats Paper";
-            case /scissors/g:
-                return  "You tie! Scissors ties with Scissors";
-        };
-    };
-    
-};
-
-
-
-
-function game() {
-    playRound(player,computerPlay);
-    playRound(player ,computerPlay);
-    playRound(player,computerPlay);
-    playRound(player,computerPlay);
-    playRound(player,computerPlay);
-};
-
-*/ 
-
-/* LOL So as we will see with this commit, I had to comment out everything,
-it was a mess, but I realized I wasn't dividing and conquering. My goal was 
-simply 'kill the beast' rather than starting with something like 'take out its
-legs first!' so I went back to the drawing board, and our opponent can now 
-spit our pseudo-random rock paper scissors choices, lets go!*/
-
-
-
+//------------------------------------------------------------
 // computer that spits out pseudo random RPS decisions
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
-}
+};
 function computerPlay() {
     let RPS = ['rock', 'paper', 'scissors'];
     let Randomizer = getRandomInt(3);
@@ -115,7 +22,6 @@ function computerPlay() {
     return RanRPS;
 
 };
-console.log(computerPlay())
 
 
 // variable to hold our player's choice
@@ -123,55 +29,57 @@ player = window.prompt("type rock, paper, or scissors please");
 
 
 //function to play the game, called RPS
-function RPS(computerSelection, playerSelection){
+function playRound(computerSelection, playerSelection){
     //variables for rock paper and scissors so they will be case insesitive
-    let rock = /rock/i;
-    let scissors = /scissors/i;
-    let paper = /paper/i;
-    console.log(computerSelection);
-    console.log(playerSelection);
-    console.log(1)
+    playerSelection = playerSelection.toLowerCase();
     if (computerSelection == 'rock') {
-        console.log("1")
+        console.log('The oppenent chose: rock')
         switch(playerSelection) {
-            case rock:
+            case 'rock':
+                console.log("You tie! Rock ties with Rock")
                 return  "You tie! Rock ties with Rock";
-            case paper:
+            case 'paper':
+                console.log("You Win! Paper beats Rock")
                 return  "You Win! Paper beats Rock";
-            case scissors:
+            case 'scissors':
+                console.log("You Lose! Rock beats Scissors")
                 return  "You Lose! Rock beats Scissors";
+        
         };
-    };
-
-    if (computerSelection == 'paper') {
-        console.log("2")
+    }else if (computerSelection == 'paper') {
+        console.log('The oponent chose: paper')
         switch(playerSelection) {
-            case rock:
+            case 'rock':
+                console.log("You Lose! Paper beats Rock")
                 return "You Lose! Paper beats Rock";
-            case paper:
+            case 'paper':
+                console.log("You tie! Paper ties with Paper")
                 return "You tie! Paper ties with Paper";
-            case scissors:
+            case 'scissors':
+                console.log("You Win! Scissors beats Paper")
                 return "You Win! Scissors beats Paper";
         };
-    };
-
-    if (computerSelection == 'scissors'){
-        console.log("3")
+    }else if (computerSelection == 'scissors'){
+        console.log('The openent chose: scissors')
         switch(playerSelection) {
-            case rock:
+            case 'rock':
+                console.log("You Win! Rock beats Scissors")
                 return  "You Win! Rock beats Scissors";
-            case paper:
+            case 'paper':
+                console.log("You Lose! Scissors beats Paper")
                 return  "You Lose! Scissors beats Paper";
-            case scissors:
+            case 'scissors':
+                console.log("You tie! Scissors ties with Scissors")
                 return  "You tie! Scissors ties with Scissors";
         };
-    };
+    }else {
+        return "Sorry, but this is an error!"
+    }
     console.log("hello")
 };
-    console.log(RPS(computerPlay, player));
 
-    /*As we can see from this commit, I made progress, I realized you can input
-    a function into another, lol. I still have one glaring issue thoug, my
-    switch statements aren't working! I used a bunch of console.logs and 
-    realized none of the initial if statements to enter the switchs were 
-    working, so that is the next problem to tackle!*/
+
+function game() {
+    playRound(computerPlay(), player)
+}
+game();
